@@ -34,45 +34,46 @@ dns:
     geoip: true
     ipcidr: null
 proxies:
-  - name: "1"
+  - name: "snell"
     type: snell
     server: 216.24.186.235
     port: 8080
     psk: 3SijfW1p0AEggq8BUCsfhE4lf8WqOBK
     obfs-opts:
       mode: tls
-  - name: "2"
-    type: vmess
-    server: v2ray.cool
-    port: 443
-    uuid: a3482e88-686a-4a58-8126-99c9df64b7bf
-    alterId: 32
-    cipher: auto
-    tls: true
-    network: ws
-    ws-path: /v
-  - name: "3"
-    type: trojan
-    server: server
-    port: 443
-    password: yourpsk
+  # We don't have more proxies right now
+  #- name: "2"
+  #  type: vmess
+  #  server: v2ray.cool
+  #  port: 443
+  #  uuid: a3482e88-686a-4a58-8126-99c9df64b7bf
+  #  alterId: 32
+  #  cipher: auto
+  #  tls: true
+  #  network: ws
+  #  ws-path: /v
+  #- name: "3"
+  #  type: trojan
+  #  server: server
+  #  port: 443
+  #  password: yourpsk
 proxy-providers: null
 proxy-groups:
   - name: Fallback
     type: fallback
     proxies:
-      - 1
-      - 2
-      - 3
+      - snell
+      #- 2
+      #- 3
     url: http://www.gstatic.com/generate_204
     interval: 300
   - name: PROXY
     type: select
     proxies:
       - Fallback
-      - 1
-      - 2
-      - 3
+      - snell
+      #- 2
+      #- 3
   - name: MATCH
     type: select
     proxies:
@@ -82,14 +83,14 @@ proxy-groups:
     type: select
     proxies:
       - PROXY
-      - 1
-      - 2
-      - 3
+      - snell
+      #- 2
+      #- 3
   - name: StreamingSE
     type: select
     proxies:
       - DIRECT
-      - 2
+      #- 2
 rule-providers:
   Unbreak:
     type: http
